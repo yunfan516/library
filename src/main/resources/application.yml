@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 注意：修改为你的数据库名，createDatabaseIfNotExist=true 表示库不存在时自动创建
+    url: jdbc:mysql://localhost:3306/lite_ims?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true
+    username: root
+    password: root  # 修改为你的数据库密码
+
+  # 全局时间格式化配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+  # 禁用 data.sql 自动执行 (防止重复初始化)
+  sql:
+    init:
+      mode: never
+
+mybatis-plus:
+  configuration:
+    # 开启驼峰命名映射 (user_name -> userName)
+    map-underscore-to-camel-case: true
+    # 控制台打印 SQL 语句 (开发调试用)
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除字段配置 (0:正常, 1:删除)
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
